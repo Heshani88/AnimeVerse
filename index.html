@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeVerse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>AnimeVerse</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="pages/anime.html">Anime</a>
+        <a href="pages/genres.html">Genres</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/favorites.html">❤️ Favorites</a>
+
+        <button id="darkModeBtn">Dark Mode</button>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Welcome to AnimeVerse</h2>
+    <p>Discover your next favorite anime.</p>
+    <button>Explore Now</button>
+</section>
+
+<section class="search-section">
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search anime..."
+    >
+
+    <select id="genreFilter">
+        <option value="all">All Genres</option>
+        <option value="action">Action</option>
+        <option value="adventure">Adventure</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="supernatural">Supernatural</option>
+        <option value="mystery">Mystery</option>
+    </select>
+
+</section>
+
+<section class="slider">
+
+    <div class="slide active">
+        <img src="images/naruto.jpg" alt="Naruto">
+        <div class="slide-text">
+            <h2>Naruto</h2>
+            <p>Believe it!</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="images/onepiece.jpg" alt="One Piece">
+        <div class="slide-text">
+            <h2>One Piece</h2>
+            <p>Set sail for adventure!</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="images/demonslayer.jpg" alt="Demon Slayer">
+        <div class="slide-text">
+            <h2>Demon Slayer</h2>
+            <p>Enter the world of Demon Slayers.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="images/attackontitan.jpg" alt="Attack on Titan">
+        <div class="slide-text">
+            <h2>Attack on Titan</h2>
+            <p>Humanity's fight for survival.</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="featured-section">
+
+    <h2>🔥 Featured Anime</h2>
+
+    <p>Discover some of the most popular anime.</p>
+
+    <section class="cards" id="featuredAnime"></section>
+
+    <a href="pages/anime.html">
+        <button class="view-all-btn">
+            View All Anime →
+        </button>
+    </a>
+
+</section>
+
+<section class="trending-section">
+
+    <h2>🔥 Trending Anime</h2>
+
+    <p>Popular anime you should check out.</p>
+
+    <div class="cards" id="trendingAnime"></div>
+
+</section>
+
+<section class="recent-section">
+
+    <h2>🕒 Recently Added</h2>
+
+    <p>Check out the latest anime added to AnimeVerse.</p>
+
+    <div class="cards" id="recentAnime"></div>
+
+</section>
+
+<footer>
+    <p>© 2026 AnimeVerse</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

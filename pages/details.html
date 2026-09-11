@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Details</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>AnimeVerse</h1>
+
+<nav>
+
+<a href="../index.html">Home</a>
+<a href="anime.html">Anime</a>
+<a href="genres.html">Genres</a>
+<a href="about.html">About</a>
+
+</nav>
+
+</header>
+
+<div class="details-navigation">
+
+    <a href="anime.html">
+        <button class="nav-btn">← Back to Anime</button>
+    </a>
+
+    <div>
+        <button id="prevAnime" class="nav-btn">
+            ← Previous
+        </button>
+
+        <button id="nextAnime" class="nav-btn">
+            Next →
+        </button>
+    </div>
+
+</div>
+
+<section class="details">
+
+    <img id="animeImage" src="" alt="Anime">
+
+    <div>
+        <h2 id="animeTitle"></h2>
+
+        <p><strong>Genre:</strong> <span id="animeGenre"></span></p>
+
+        <p><strong>Episodes:</strong> <span id="animeEpisodes"></span></p>
+
+        <p><strong>Rating:</strong> ⭐ <span id="animeRating"></span></p>
+
+        <p id="animeDescription"></p>
+
+        <button id="trailerBtn" class="trailer-btn">
+        ▶️ Watch Trailer
+        </button>
+
+        <button id="watchBtn" class="watch-btn">
+        🍿 Watch Now
+        </button>
+
+        <button id="favoriteBtn" class="favorite-btn">
+        ❤️ Add to Favorites
+        </button>
+    </div>
+
+</section>
+
+<section class="episodes-section">
+
+    <h2> Episodes</h2>
+
+    <div class="episodes" id="episodesList"></div>
+
+</section>
+
+<script src="../script.js"></script>
+
+</body>
+
+</html>
