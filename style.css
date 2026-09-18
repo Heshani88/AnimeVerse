@@ -1147,3 +1147,13 @@ footer p {
     margin-top: 10px;
     color: #666;
 }
+
+.user-card-rating {
+    color: #f4511e;
+    font-weight: bold;
+    margin: 8px 0 12px;
+}
+
+.dark-mode .user-card-rating {
+    color: #ff7043;
+}

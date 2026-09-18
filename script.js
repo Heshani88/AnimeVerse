@@ -261,6 +261,8 @@ if (animeList) {
             return;
         }
 
+        const savedUserRating = localStorage.getItem("rating_" + id);
+
         animeList.innerHTML += `
             <div class="card">
 
@@ -273,6 +275,14 @@ if (animeList) {
                 <p class="rating">
                     ⭐ ${anime.rating}
                 </p>
+
+                ${
+                    savedUserRating
+                        ? `<p class="user-card-rating">
+                            Your Rating: ⭐ ${savedUserRating}/5
+                           </p>`
+                        : ""
+                }
 
                 <a href="details.html?anime=${id}">
                     <button class="details-btn">
@@ -367,6 +377,12 @@ if (favoritesList) {
                         <p class="rating">
                             ⭐ ${anime.rating}
                         </p>
+
+                        ${localStorage.getItem("rating_" + id)
+    ? `<p class="user-card-rating">
+        Your Rating: ⭐ ${localStorage.getItem("rating_" + id)}/5
+       </p>`
+    : ""}
 
                         <a href="details.html?anime=${id}">
                             <button class="details-btn">
@@ -720,6 +736,12 @@ if (watchlistContainer) {
                     ⭐ ${anime.rating}
                 </p>
 
+                ${localStorage.getItem("rating_" + animeId)
+    ? `<p class="user-card-rating">
+        Your Rating: ⭐ ${localStorage.getItem("rating_" + animeId)}/5
+       </p>`
+    : ""}
+
                 <button class="details-btn" onclick="window.location.href='details.html?anime=${animeId}'">View Details</button>
 
                 <button 
@@ -846,4 +868,53 @@ if (starButtons.length > 0) {
 
         });
     }
+}
+
+// Anime Sorting System
+const sortAnime = document.getElementById("sortAnime");
+
+if (sortAnime && animeList) {
+
+    sortAnime.addEventListener("change", function () {
+
+        const cards = Array.from(animeList.querySelectorAll(".card"));
+        const sortValue = sortAnime.value;
+
+        cards.sort((a, b) => {
+
+            const nameA = a.querySelector("h3").textContent.toLowerCase();
+            const nameB = b.querySelector("h3").textContent.toLowerCase();
+
+            const ratingA = parseFloat(
+                a.querySelector(".rating").textContent.match(/[\d.]+/)[0]
+            );
+
+            const ratingB = parseFloat(
+                b.querySelector(".rating").textContent.match(/[\d.]+/)[0]
+            );
+
+            if (sortValue === "nameAZ") {
+                return nameA.localeCompare(nameB);
+            }
+
+            if (sortValue === "nameZA") {
+                return nameB.localeCompare(nameA);
+            }
+
+            if (sortValue === "ratingHigh") {
+                return ratingB - ratingA;
+            }
+
+            if (sortValue === "ratingLow") {
+                return ratingA - ratingB;
+            }
+
+            return 0;
+        });
+
+        cards.forEach(card => {
+            animeList.appendChild(card);
+        });
+
+    });
 }
