@@ -4,8 +4,10 @@
     <title>AnimeVerse - Anime</title>
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-    
+
+    <!-- Header -->
     <header>
         <h1>AnimeVerse</h1>
 
@@ -17,10 +19,54 @@
         </nav>
     </header>
 
+
+    <!-- Hero Section -->
     <section class="hero">
-        <h2>Anime Clloection</h2>
+        <h2>Anime Collection</h2>
         <p>Browse all your favorite anime.</p>
     </section>
+
+
+    <!-- Search Section -->
+    <section class="search-section">
+
+        <input 
+        type="text" 
+        id="searchBox" 
+        placeholder="Search anime..."
+        >
+
+        <select id="genreFilter">
+            <option value="all">All Genres</option>
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="supernatural">Supernatural</option>
+            <option value="thriller">Thriller</option>
+        </select>
+
+    </section>
+
+
+    <!-- Anime Collection -->
+    <section class="featured-section">
+
+        <h2>All Anime</h2>
+        <p>Explore our anime collection.</p>
+
+
+        <div class="cards" id="animeList">
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 AnimeVerse. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
 
 </body>
 </html>

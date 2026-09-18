@@ -81,14 +81,14 @@ The main goals of AnimeVerse are:
 
 Future Improvements
 
-- 🔐 User authentication and login
-- ⭐ User ratings and reviews
-- 📋 Personal watchlist
-- 🔍 Advanced search and filtering
-- 🌐 Anime API integration
-- 🤖 Anime recommendation system
-- 🧪 Automated testing
-- 🗄️ Backend and database integration
+- User authentication and login
+- User ratings and reviews
+- Personal watchlist
+- Advanced search and filtering
+- Anime API integration
+- Anime recommendation system
+- Automated testing
+- Backend and database integration
 
 Developer
 

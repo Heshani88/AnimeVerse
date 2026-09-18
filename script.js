@@ -53,9 +53,9 @@ if (darkModeBtn) {
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
-            darkModeBtn.textContent = "☀️ Light Mode";
+            darkModeBtn.textContent = "Light Mode";
         } else {
-            darkModeBtn.textContent = "🌙 Dark Mode";
+            darkModeBtn.textContent = "Dark Mode";
         }
     });
 }
@@ -239,7 +239,6 @@ if (animeList) {
 
         const anime = animeData[id];
 
-        // Genre filter
         if (
             selectedGenre &&
             !anime.genre.toLowerCase().includes(selectedGenre)
@@ -250,8 +249,7 @@ if (animeList) {
         animeList.innerHTML += `
             <div class="card">
 
-                <img src="${anime.image.replace("../", "")}"
-                     alt="${anime.title}">
+                <img src="${anime.image}" alt="${anime.title}">
 
                 <h3>${anime.title}</h3>
 
@@ -623,4 +621,162 @@ if (watchBtn && animeId && animeData[animeId]) {
     } else {
         watchBtn.style.display = "none";
     }
+}
+
+const watchlistBtn = document.getElementById("watchlistBtn");
+
+if (watchlistBtn && animeId && animeData[animeId]) {
+
+    let watchlist =
+        JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+    const isAlreadyInWatchlist =
+        watchlist.includes(animeId);
+
+    if (isAlreadyInWatchlist) {
+        watchlistBtn.textContent = "✅ Added to Watchlist";
+    }
+
+    watchlistBtn.addEventListener("click", function () {
+
+        let watchlist =
+            JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+        if (watchlist.includes(animeId)) {
+
+            alert("This anime is already in your Watchlist.");
+
+        } else {
+
+            watchlist.push(animeId);
+
+            localStorage.setItem(
+                "animeWatchlist",
+                JSON.stringify(watchlist)
+            );
+
+            watchlistBtn.textContent = "✅ Added to Watchlist";
+
+            alert(
+                animeData[animeId].title +
+                " has been added to your Watchlist!"
+            );
+        }
+    });
+}
+
+const watchlistContainer =
+    document.getElementById("watchlistContainer");
+
+if (watchlistContainer) {
+
+    const watchlist =
+        JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+    if (watchlist.length === 0) {
+
+        watchlistContainer.innerHTML = `
+            <div class="empty-favorites">
+                <h3>Your Watchlist is Empty</h3>
+                <p>Add anime from the details page to see them here.</p>
+            </div>
+        `;
+
+    } else {
+
+        watchlist.forEach(animeId => {
+
+            const anime = animeData[animeId];
+
+            if (!anime) return;
+
+            const card = document.createElement("div");
+
+            card.className = "card";
+
+            card.innerHTML = `
+                <img src="${anime.image}" alt="${anime.title}">
+
+                <h3>${anime.title}</h3>
+
+                <p>${anime.genre}</p>
+
+                <p class="rating">
+                    ⭐ ${anime.rating}
+                </p>
+
+                <button class="details-btn" onclick="window.location.href='details.html?anime=${animeId}'">View Details</button>
+
+                <button 
+                    class="remove-watchlist-btn"
+                    data-id="${animeId}">
+                    ❌ Remove
+                </button>
+            `;
+
+            watchlistContainer.appendChild(card);
+        });
+    }
+}
+
+/* ================================
+   REMOVE FROM WATCHLIST
+   ================================ */
+
+const removeWatchlistButtons =
+    document.querySelectorAll(".remove-watchlist-btn");
+
+removeWatchlistButtons.forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const animeId = this.getAttribute("data-id");
+
+        let watchlist =
+            JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+        watchlist = watchlist.filter(id => id !== animeId);
+
+        localStorage.setItem(
+            "animeWatchlist",
+            JSON.stringify(watchlist)
+        );
+
+        alert("Anime removed from your Watchlist!");
+
+        location.reload();
+    });
+});
+
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const message =
+            document.getElementById("message").value.trim();
+
+        if (name === "" || email === "" || message === "") {
+
+            formMessage.textContent =
+                "⚠️ Please fill in all fields.";
+
+            return;
+        }
+
+        formMessage.textContent =
+            "✅ Thank you! Your message has been submitted.";
+
+        contactForm.reset();
+    });
 }
