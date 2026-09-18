@@ -48,15 +48,30 @@ if (searchBox && genreFilter) {
 
 const darkModeBtn = document.getElementById("darkModeBtn");
 
+// Load saved dark mode
+if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark-mode");
+}
+
+// Dark mode button
 if (darkModeBtn) {
+
+    if (document.body.classList.contains("dark-mode")) {
+        darkModeBtn.textContent = "Light Mode";
+    }
+
     darkModeBtn.addEventListener("click", function () {
+
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
             darkModeBtn.textContent = "Light Mode";
         } else {
+            localStorage.setItem("darkMode", "disabled");
             darkModeBtn.textContent = "Dark Mode";
         }
+
     });
 }
 
@@ -779,4 +794,56 @@ if (contactForm) {
 
         contactForm.reset();
     });
+}
+
+// User Rating System
+const starButtons = document.querySelectorAll(".star-btn");
+const userRatingMessage = document.getElementById("userRatingMessage");
+
+if (starButtons.length > 0) {
+
+    const currentAnimeId = new URLSearchParams(window.location.search).get("anime");
+
+    if (currentAnimeId) {
+
+        const ratingKey = "rating_" + currentAnimeId;
+        const savedRating = localStorage.getItem(ratingKey);
+
+        // Load saved rating
+        if (savedRating) {
+
+            starButtons.forEach(star => {
+                if (Number(star.dataset.rating) <= Number(savedRating)) {
+                    star.classList.add("selected");
+                }
+            });
+
+            userRatingMessage.textContent =
+                "You rated this anime ⭐ " + savedRating + "/5";
+        }
+
+        // Save new rating
+        starButtons.forEach(star => {
+
+            star.addEventListener("click", function () {
+
+                const rating = this.dataset.rating;
+
+                localStorage.setItem(ratingKey, rating);
+
+                starButtons.forEach(button => {
+                    button.classList.remove("selected");
+
+                    if (Number(button.dataset.rating) <= Number(rating)) {
+                        button.classList.add("selected");
+                    }
+                });
+
+                userRatingMessage.textContent =
+                    "You rated this anime ⭐ " + rating + "/5";
+
+            });
+
+        });
+    }
 }

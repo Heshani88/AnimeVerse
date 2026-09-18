@@ -1107,3 +1107,43 @@ footer p {
     }
 
 }
+
+/* User Rating */
+
+.user-rating {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff7f0;
+    border-radius: 15px;
+    border: 1px solid #ffe0d2;
+}
+
+.user-rating h3 {
+    color: #f4511e;
+    margin-bottom: 12px;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+}
+
+.star-btn {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: 0.2s;
+}
+
+.star-btn:hover,
+.star-btn.selected {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#userRatingMessage {
+    margin-top: 10px;
+    color: #666;
+}
