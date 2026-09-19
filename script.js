@@ -57,7 +57,9 @@ if (localStorage.getItem("darkMode") === "enabled") {
 if (darkModeBtn) {
 
     if (document.body.classList.contains("dark-mode")) {
-        darkModeBtn.textContent = "Light Mode";
+        darkModeBtn.textContent = "☀️";
+    } else {
+        darkModeBtn.textContent = "🌙";
     }
 
     darkModeBtn.addEventListener("click", function () {
@@ -66,10 +68,10 @@ if (darkModeBtn) {
 
         if (document.body.classList.contains("dark-mode")) {
             localStorage.setItem("darkMode", "enabled");
-            darkModeBtn.textContent = "Light Mode";
+            darkModeBtn.textContent = "☀️";
         } else {
             localStorage.setItem("darkMode", "disabled");
-            darkModeBtn.textContent = "Dark Mode";
+            darkModeBtn.textContent = "🌙";
         }
 
     });
@@ -284,11 +286,19 @@ if (animeList) {
                         : ""
                 }
 
-                <a href="details.html?anime=${id}">
-                    <button class="details-btn">
-                        View Details
-                    </button>
-                </a>
+                <div class="card-buttons">
+
+    <a href="details.html?anime=${id}">
+        <button class="details-btn">
+            View Details
+        </button>
+    </a>
+
+    <button class="card-favorite-btn" data-id="${id}">
+        ❤️ Favorite
+    </button>
+
+</div>
 
             </div>
         `;
@@ -627,11 +637,8 @@ if (episodesList && animeId && animeData[animeId]) {
 
         episodeButton.addEventListener("click", function () {
 
-            if (animeData[animeId].watch) {
-                window.open(animeData[animeId].watch, "_blank");
-            } else {
-                alert("Official watch link is not available.");
-            }
+            window.location.href =
+            `watch.html?anime=${animeId}&episode=${i}`;
 
         });
 
@@ -917,4 +924,481 @@ if (sortAnime && animeList) {
         });
 
     });
+}
+
+const cardFavoriteButtons = document.querySelectorAll(".card-favorite-btn");
+
+cardFavoriteButtons.forEach(button => {
+
+    const id = button.getAttribute("data-id");
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (favorites.includes(id)) {
+        button.textContent = "❤️ Favorited";
+    }
+
+    button.addEventListener("click", function () {
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        if (favorites.includes(id)) {
+
+            favorites = favorites.filter(item => item !== id);
+            button.textContent = "❤️ Favorite";
+
+        } else {
+
+            favorites.push(id);
+            button.textContent = "❤️ Favorited";
+
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    });
+});
+
+const showsList = document.getElementById("showsList");
+
+if (showsList) {
+
+    const showIds = [
+        "naruto",
+        "onepiece",
+        "demonslayer",
+        "bleach",
+        "jujutsukaisen",
+        "attackontitan",
+        "sololeveling",
+        "deathnote"
+    ];
+
+    showIds.forEach(id => {
+
+        const anime = animeData[id];
+
+        if (!anime) return;
+
+        const savedUserRating = localStorage.getItem("rating_" + id);
+
+        showsList.innerHTML += `
+            <div class="card">
+
+                <img src="${anime.image}" alt="${anime.title}">
+
+                <h3>${anime.title}</h3>
+
+                <p>${anime.genre}</p>
+
+                <p class="rating">
+                    ⭐ ${anime.rating}
+                </p>
+
+                ${
+                    savedUserRating
+                        ? `<p class="user-card-rating">
+                            Your Rating: ⭐ ${savedUserRating}/5
+                           </p>`
+                        : ""
+                }
+
+                <div class="card-buttons">
+
+                    <a href="details.html?anime=${id}">
+                        <button class="details-btn">
+                            View Details
+                        </button>
+                    </a>
+
+                    <button class="show-watchlist-btn" data-id="${id}">
+                        Watchlist
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+    });
+}
+
+const showsSearch = document.getElementById("showsSearch");
+const showsGenre = document.getElementById("showsGenre");
+
+if (showsSearch && showsGenre && showsList) {
+
+    function filterShows() {
+
+        const searchValue = showsSearch.value.toLowerCase();
+        const selectedGenre = showsGenre.value.toLowerCase();
+
+        const cards = showsList.querySelectorAll(".card");
+
+        cards.forEach(card => {
+
+            const title = card.querySelector("h3");
+            const genre = card.querySelector("p");
+
+            if (!title || !genre) return;
+
+            const animeTitle = title.textContent.toLowerCase();
+            const animeGenre = genre.textContent.toLowerCase();
+
+            const matchesSearch =
+                animeTitle.includes(searchValue);
+
+            const matchesGenre =
+                selectedGenre === "all" ||
+                animeGenre.includes(selectedGenre);
+
+            card.style.display =
+                matchesSearch && matchesGenre
+                    ? "block"
+                    : "none";
+        });
+    }
+
+    showsSearch.addEventListener("keyup", filterShows);
+
+    showsGenre.addEventListener("change", filterShows);
+}
+
+const showsSort = document.getElementById("showsSort");
+
+if (showsSort && showsList) {
+
+    showsSort.addEventListener("change", function () {
+
+        const cards = Array.from(
+            showsList.querySelectorAll(".card")
+        );
+
+        const sortValue = showsSort.value;
+
+        cards.sort((a, b) => {
+
+            const nameA = a.querySelector("h3")
+                .textContent
+                .toLowerCase();
+
+            const nameB = b.querySelector("h3")
+                .textContent
+                .toLowerCase();
+
+            const ratingA = parseFloat(
+                a.querySelector(".rating")
+                    .textContent
+                    .match(/[\d.]+/)[0]
+            );
+
+            const ratingB = parseFloat(
+                b.querySelector(".rating")
+                    .textContent
+                    .match(/[\d.]+/)[0]
+            );
+
+            if (sortValue === "nameAZ") {
+                return nameA.localeCompare(nameB);
+            }
+
+            if (sortValue === "nameZA") {
+                return nameB.localeCompare(nameA);
+            }
+
+            if (sortValue === "ratingHigh") {
+                return ratingB - ratingA;
+            }
+
+            if (sortValue === "ratingLow") {
+                return ratingA - ratingB;
+            }
+
+            return 0;
+        });
+
+        cards.forEach(card => {
+            showsList.appendChild(card);
+        });
+
+    });
+}
+
+const showWatchlistButtons =
+    document.querySelectorAll(".show-watchlist-btn");
+
+showWatchlistButtons.forEach(button => {
+
+    const id = button.getAttribute("data-id");
+
+    let watchlist =
+        JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+    if (watchlist.includes(id)) {
+        button.textContent = "✅ Added";
+    }
+
+    button.addEventListener("click", function () {
+
+        let watchlist =
+            JSON.parse(localStorage.getItem("animeWatchlist")) || [];
+
+        if (watchlist.includes(id)) {
+
+            watchlist =
+                watchlist.filter(item => item !== id);
+
+            button.textContent = "Watchlist";
+
+        } else {
+
+            watchlist.push(id);
+
+            button.textContent = "✅ Added";
+
+        }
+
+        localStorage.setItem(
+            "animeWatchlist",
+            JSON.stringify(watchlist)
+        );
+
+    });
+
+});
+
+// ===== MANGA SEARCH & FILTER =====
+
+const mangaSearch = document.getElementById("mangaSearch");
+const mangaGenre = document.getElementById("mangaGenre");
+const mangaList = document.getElementById("mangaList");
+
+if (mangaSearch && mangaGenre && mangaList) {
+
+    function filterManga() {
+
+        const searchValue =
+            mangaSearch.value.toLowerCase();
+
+        const selectedGenre =
+            mangaGenre.value.toLowerCase();
+
+        const cards =
+            mangaList.querySelectorAll(".card");
+
+        cards.forEach(card => {
+
+            const title =
+                card.querySelector("h3");
+
+            const genre =
+                card.querySelector("p");
+
+            if (!title || !genre) return;
+
+            const mangaTitle =
+                title.textContent.toLowerCase();
+
+            const mangaGenre =
+                genre.textContent.toLowerCase();
+
+            const matchesSearch =
+                mangaTitle.includes(searchValue);
+
+            const matchesGenre =
+                selectedGenre === "all" ||
+                mangaGenre.includes(selectedGenre);
+
+            card.style.display =
+                matchesSearch && matchesGenre
+                    ? "block"
+                    : "none";
+
+        });
+    }
+
+    mangaSearch.addEventListener(
+        "keyup",
+        filterManga
+    );
+
+    mangaGenre.addEventListener(
+        "change",
+        filterManga
+    );
+}
+
+// ===== MANGA WATCHLIST =====
+
+const mangaWatchlistButtons =
+    document.querySelectorAll("#mangaList .show-watchlist-btn");
+
+mangaWatchlistButtons.forEach(button => {
+
+    const card = button.closest(".card");
+
+    if (!card) return;
+
+    const titleElement = card.querySelector("h3");
+
+    if (!titleElement) return;
+
+    const mangaTitle =
+        titleElement.textContent.trim();
+
+    let mangaWatchlist =
+        JSON.parse(
+            localStorage.getItem("mangaWatchlist")
+        ) || [];
+
+    if (mangaWatchlist.includes(mangaTitle)) {
+        button.textContent = "✅ Added";
+    }
+
+    button.addEventListener("click", function () {
+
+        let mangaWatchlist =
+            JSON.parse(
+                localStorage.getItem("mangaWatchlist")
+            ) || [];
+
+        if (mangaWatchlist.includes(mangaTitle)) {
+
+            mangaWatchlist =
+                mangaWatchlist.filter(
+                    item => item !== mangaTitle
+                );
+
+            button.textContent = "Watchlist";
+
+        } else {
+
+            mangaWatchlist.push(mangaTitle);
+
+            button.textContent = "✅ Added";
+        }
+
+        localStorage.setItem(
+            "mangaWatchlist",
+            JSON.stringify(mangaWatchlist)
+        );
+
+    });
+
+});
+
+// ===== WATCH EPISODE PAGE =====
+
+const watchTitle = document.getElementById("watchTitle");
+const watchEpisode = document.getElementById("watchEpisode");
+const watchAnimeTitle = document.getElementById("watchAnimeTitle");
+const watchEpisodeNumber = document.getElementById("episodeNumber");
+const officialWatchBtn = document.getElementById("officialWatchBtn");
+const animeVideo = document.getElementById("animeVideo");
+
+if (watchTitle && watchEpisode) {
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const watchAnimeId =
+        urlParams.get("anime");
+
+    const watchEpisodeNumber =
+        urlParams.get("episode");
+
+    if (watchAnimeId && animeData[watchAnimeId]) {
+
+        const anime = animeData[watchAnimeId];
+
+        watchTitle.textContent =
+            `${anime.title} - Episode ${watchEpisodeNumber}`;
+
+        watchEpisode.textContent =
+            `🎬 Now watching Episode ${watchEpisodeNumber}`;
+
+        watchAnimeTitle.textContent =
+            anime.title;
+
+        watchEpisodeNumber.textContent =
+            `Episode ${watchEpisodeNumber}`;
+
+        officialWatchBtn.href =
+            anime.watch;
+
+        animeVideo.poster =
+            anime.image;
+
+    } else {
+
+        watchTitle.textContent =
+            "Episode Not Found";
+
+        watchEpisode.textContent =
+            "The requested episode could not be found.";
+
+    }
+}
+
+// ===== EPISODE NAVIGATION =====
+
+const episodeNavParams =
+    new URLSearchParams(window.location.search);
+
+const episodeAnimeId =
+    episodeNavParams.get("anime");
+
+const currentEpisode =
+    parseInt(episodeNavParams.get("episode"));
+
+const previousEpisode =
+    document.getElementById("previousEpisode");
+
+const nextEpisode =
+    document.getElementById("nextEpisode");
+
+if (
+    previousEpisode &&
+    nextEpisode &&
+    episodeAnimeId &&
+    animeData[episodeAnimeId] &&
+    currentEpisode
+) {
+
+    const totalEpisodes =
+        parseInt(animeData[episodeAnimeId].episodes);
+
+    previousEpisode.onclick = function () {
+
+        if (currentEpisode > 1) {
+
+            window.location.href =
+                "watch.html?anime=" +
+                episodeAnimeId +
+                "&episode=" +
+                (currentEpisode - 1);
+
+        }
+
+    };
+
+    nextEpisode.onclick = function () {
+
+        if (currentEpisode < totalEpisodes) {
+
+            window.location.href =
+                "watch.html?anime=" +
+                episodeAnimeId +
+                "&episode=" +
+                (currentEpisode + 1);
+
+        }
+
+    };
+
+    if (currentEpisode <= 1) {
+        previousEpisode.disabled = true;
+    }
+
+    if (currentEpisode >= totalEpisodes) {
+        nextEpisode.disabled = true;
+    }
+
 }

@@ -793,8 +793,18 @@ nav a:hover {
     color: #ffffff;
 }
 
-.dark-mode header {
+.dark-mode .main-header {
     background: #1e1e1e;
+}
+
+.dark-mode .main-nav a,
+.dark-mode .header-link {
+    color: #ffffff;
+}
+
+.dark-mode .main-nav a:hover,
+.dark-mode .header-link:hover {
+    color: #ff7043;
 }
 
 .dark-mode nav a {
@@ -1156,4 +1166,396 @@ footer p {
 
 .dark-mode .user-card-rating {
     color: #ff7043;
+}
+
+/* ===== MODERN HEADER ===== */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #ffffff;
+    color: #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.logo a {
+    color: #ff7043;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.main-nav {
+    display: flex;
+    gap: 22px;
+}
+
+.main-nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.main-nav a:hover {
+    color: #ff7043;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 19px;
+    padding: 6px;
+    transition: 0.3s;
+}
+
+.header-link:hover {
+    color: #f4511e;
+    transform: scale(1.1);
+}
+
+.signin-btn,
+.login-btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.signin-btn {
+    background: #ff7043;
+    color: white;
+}
+
+.login-btn {
+    background: #ff7043;
+    color: white;
+}
+
+.signin-btn:hover {
+    opacity: 0.85;
+}
+
+.login-btn:hover {
+    opacity: 0.85;
+}
+
+.dark-mode-btn {
+    border: none;
+    background: #222;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dark-mode-btn:hover {
+    background: #333;
+}
+
+.show-watchlist-btn {
+    background: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.show-watchlist-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.show-watchlist-btn:active {
+    transform: scale(0.97);
+}
+
+/* ===== SHOW CARD BUTTONS ===== */
+
+.card-buttons {
+    display: flex;
+    gap: 6px;
+    margin: 12px 15px 20px;
+}
+
+.card-buttons > a,
+.card-buttons > button {
+    flex: 1;
+    width: 50%;
+}
+
+.card-buttons > a {
+    text-decoration: none;
+}
+
+.card-buttons button {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 0 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card-buttons .details-btn {
+    width: 100%;
+    height: 42px;
+    margin: 0;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.card-buttons .show-watchlist-btn {
+    width: 100%;
+    height: 42px;
+    margin: 0;
+    padding: 0 8px;
+    background: #f4511e;
+    color: white;
+    box-sizing: border-box;
+}
+
+.card-buttons button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ===== NEWS CARDS ===== */
+
+.news-card {
+    padding-bottom: 20px;
+}
+
+.news-icon {
+    font-size: 45px;
+    padding: 25px 0 10px;
+}
+
+.news-card h3 {
+    min-height: 50px;
+}
+
+.news-card p {
+    padding: 0 18px;
+    line-height: 1.6;
+}
+
+.news-date {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #fff1eb;
+    color: #f4511e;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.dark-mode .news-date {
+    background: #2a2a2a;
+    color: #ff7043;
+}
+
+/* ===== WATCH PAGE ===== */
+
+.watch-section {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+.watch-section h1 {
+    color: #f4511e;
+    margin-bottom: 10px;
+}
+
+.watch-section > p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.video-container video {
+    width: 100%;
+    height: 500px;
+    display: block;
+    object-fit: contain;
+    background: #000;
+}
+
+.watch-info {
+    margin: 25px 0;
+}
+
+.watch-info h2 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.watch-info p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.episode-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.episode-navigation .nav-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #f4511e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.episode-navigation .nav-btn:hover {
+    background: #ff7043;
+    transform: translateY(-2px);
+}
+
+
+/* Dark Mode */
+
+.dark-mode .watch-section h1 {
+    color: #ff7043;
+}
+
+.dark-mode .watch-info h2 {
+    color: white;
+}
+
+.dark-mode .watch-section > p,
+.dark-mode .watch-info p {
+    color: #bbb;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .watch-section {
+        padding: 20px 15px;
+        margin: 30px auto;
+    }
+
+    .video-container video {
+        height: 300px;
+    }
+
+    .episode-navigation {
+        flex-direction: column;
+    }
+
+    .episode-navigation .nav-btn {
+        width: 100%;
+    }
+}
+
+#nextEpisode {
+    position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+#previousEpisode {
+    position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* ===== BACK TO DETAILS BUTTON ===== */
+
+.back-details-btn {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 11px 20px;
+    background: #f4511e;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-details-btn:hover {
+    background: #ff7043;
+    transform: translateY(-2px);
+}
+
+/* ===== EPISODE BUTTONS ===== */
+
+.episodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.episode-btn {
+    padding: 12px 10px;
+    background: #f4511e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.episode-btn:hover {
+    background: #ff7043;
+    transform: translateY(-2px);
+}
+
+.episode-btn:active {
+    transform: scale(0.97);
+}
+
+.dark-mode .episode-btn {
+    background: #ff7043;
+}
+
+.dark-mode .episode-btn:hover {
+    background: #f4511e;
 }

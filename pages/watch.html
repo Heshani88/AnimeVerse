@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Watch Episode - AnimeVerse</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+
+    <div class="logo">
+        <a href="../index.html">AnimeVerse</a>
+    </div>
+
+    <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="anime.html">Anime</a>
+        <a href="shows.html">Shows</a>
+        <a href="manga.html">Manga</a>
+        <a href="news.html">News</a>
+        <a href="genres.html">Genres</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="favorites.html" class="header-link">❤️</a>
+        <a href="watchlist.html" class="header-link">📋</a>
+
+        <a href="signin.html" class="signin-btn">
+            Sign In
+        </a>
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+        <button id="darkModeBtn" class="dark-mode-btn">
+            🌙
+        </button>
+    </div>
+
+</header>
+
+
+<section class="watch-section">
+
+    <h1 id="watchTitle">Watch Episode</h1>
+
+    <p id="watchEpisode"></p>
+
+    <div class="video-container">
+
+        <video controls poster="" id="animeVideo">
+            <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+            >
+
+            Your browser does not support HTML5 video.
+        </video>
+
+    </div>
+
+    <a href="#" id="backToDetails" class="back-details-btn">
+        ← Back to Anime Details
+    </a>
+
+    <div class="watch-info">
+
+        <h2 id="watchAnimeTitle"></h2>
+
+        <p>
+            You are watching:
+            <strong id="episodeNumber"></strong>
+        </p>
+
+        <a
+            href="#"
+            id="officialWatchBtn"
+            class="watch-btn"
+            target="_blank"
+        >
+            ▶ Watch on Crunchyroll
+        </a>
+
+    </div>
+
+    <div class="episode-navigation">
+
+        <button id="previousEpisode" class="nav-btn">
+            ← Previous Episode
+        </button>
+
+        <button id="nextEpisode" class="nav-btn">
+            Next Episode →
+        </button>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 AnimeVerse. All Rights Reserved.
+    </p>
+
+</footer>
+
+<script src="../script.js"></script>
+
+<script src="../script.js"></script>
+
+<script>
+const nextBtn = document.getElementById("nextEpisode");
+const previousBtn = document.getElementById("previousEpisode");
+
+const backToDetails = document.getElementById("backToDetails");
+const url = new URLSearchParams(window.location.search);
+
+const anime = url.get("anime");
+const episode = parseInt(url.get("episode"));
+
+if (nextBtn) {
+    nextBtn.onclick = function () {
+
+        if (anime && episode) {
+            window.location.href =
+                "watch.html?anime=" +
+                anime +
+                "&episode=" +
+                (episode + 1);
+        }
+
+    };
+}
+
+if (previousBtn) {
+    previousBtn.onclick = function () {
+
+        if (anime && episode > 1) {
+            window.location.href =
+                "watch.html?anime=" +
+                anime +
+                "&episode=" +
+                (episode - 1);
+        }
+
+    };
+}
+
+if (backToDetails && anime) {
+    backToDetails.href =
+        "details.html?anime=" + anime;
+}
+</script>
+
+</body>
+</html>

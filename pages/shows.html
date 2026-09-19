@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AnimeVerse - Shows</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+
+    <div class="logo">
+        <a href="../index.html">AnimeVerse</a>
+    </div>
+
+    <nav class="main-nav">
+
+        <a href="../index.html">Home</a>
+        <a href="anime.html">Anime</a>
+        <a href="shows.html">Shows</a>
+        <a href="manga.html">Manga</a>
+        <a href="news.html">News</a>
+        <a href="genres.html">Genres</a>
+        <a href="about.html">About</a>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <a href="favorites.html" class="header-link">
+            ❤️
+        </a>
+
+        <a href="watchlist.html" class="header-link">
+            📋
+        </a>
+
+        <a href="signin.html" class="signin-btn">
+            Sign In
+        </a>
+
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+        <button id="darkModeBtn" class="dark-mode-btn">
+            🌙
+        </button>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <h2>Anime Shows</h2>
+
+    <p>
+        Discover popular anime series and shows.
+    </p>
+
+</section>
+
+
+<section class="featured-section">
+
+    <h2>Popular Shows</h2>
+
+    <p>
+        Explore anime series you may enjoy.
+    </p>
+
+    <div class="search-section">
+
+        <input
+            type="text"
+            id="showsSearch"
+            placeholder="Search shows..."
+        >
+
+        <select id="showsGenre">
+
+            <option value="all">All Genres</option>
+
+            <option value="action">Action</option>
+
+            <option value="adventure">Adventure</option>
+
+            <option value="fantasy">Fantasy</option>
+
+            <option value="supernatural">Supernatural</option>
+
+            <option value="thriller">Thriller</option>
+
+        </select>
+
+        <select id="showsSort">
+
+           <option value="default">Sort Shows</option>
+
+                <option value="ratingHigh">
+                    ⭐ Rating: High to Low
+                </option>
+
+                <option value="ratingLow">
+                    ⭐ Rating: Low to High
+                </option>
+
+                <option value="nameAZ">
+                    🔤 Name: A to Z
+                </option>
+
+                <option value="nameZA">
+                    🔤 Name: Z to A
+                </option>
+
+        </select>
+
+    </div>
+
+    <div class="cards" id="showsList">
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 AnimeVerse. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script src="../script.js"></script>
+
+</body>
+
+</html>
