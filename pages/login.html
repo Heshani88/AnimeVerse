@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AnimeVerse - Login</title>
+    <title>Login - AnimeVerse</title>
 
     <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
+<body class="auth-page">
 
 <header class="main-header">
 
@@ -29,9 +28,7 @@
     </nav>
 
     <div class="header-actions">
-
         <a href="favorites.html" class="header-link">❤️</a>
-
         <a href="watchlist.html" class="header-link">📋</a>
 
         <a href="signin.html" class="signin-btn">
@@ -45,74 +42,309 @@
         <button id="darkModeBtn" class="dark-mode-btn">
             🌙
         </button>
-
     </div>
 
 </header>
 
 
-<section class="hero">
+<main class="advanced-auth-container">
 
-    <h2>🔑 Login</h2>
+    <div class="advanced-auth-card">
 
-    <p>Login to continue using AnimeVerse.</p>
+        <!-- LEFT VISUAL -->
 
-</section>
+        <section class="auth-visual">
+
+            <div class="visual-glow glow-one"></div>
+            <div class="visual-glow glow-two"></div>
+
+            <div class="anime-orb orb-one">✦</div>
+            <div class="anime-orb orb-two">✧</div>
+            <div class="anime-orb orb-three">✦</div>
+
+            <div class="visual-content">
+
+                <div class="visual-logo">
+                    🎬
+                </div>
+
+                <h2>
+                    Welcome to
+                    <span>AnimeVerse</span>
+                </h2>
+
+                <p>
+                    Your world of anime, manga and unforgettable
+                    stories starts here.
+                </p>
+
+                <div class="visual-features">
+
+                    <div>
+                        <span>⚡</span>
+                        <p>Discover Anime</p>
+                    </div>
+
+                    <div>
+                        <span>❤️</span>
+                        <p>Save Favorites</p>
+                    </div>
+
+                    <div>
+                        <span>📺</span>
+                        <p>Track Episodes</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
 
-<section class="form-section">
+        <!-- RIGHT LOGIN -->
 
-    <div class="form-container">
+        <section class="advanced-login">
 
-        <h2>Login to AnimeVerse</h2>
+            <div class="login-heading">
 
-        <form id="loginForm">
+                <span class="small-title">
+                    ANIMEVERSE ACCOUNT
+                </span>
 
-            <label for="loginEmail">Email</label>
+                <h1>
+                    Welcome Back 👋
+                </h1>
 
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Enter your email"
-                required
+                <p>
+                    Sign in to continue your anime journey.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+                <div class="advanced-input">
+
+                    <label for="loginEmail">
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="advanced-input">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="toggleLoginPassword"
+                            class="password-toggle"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="login-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        Remember me
+                    </label>
+
+                    <a href="#">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="advanced-login-btn"
+                >
+                    <span>Login to AnimeVerse</span>
+                    <strong>→</strong>
+                </button>
+
+
+                <p
+                    id="loginMessage"
+                    class="auth-message"
+                ></p>
+
+            </form>
+
+
+            <div class="advanced-divider">
+                <span>OR</span>
+            </div>
+
+
+            <p class="create-account">
+
+                New to AnimeVerse?
+
+                <a href="signin.html">
+                    Create an account
+                </a>
+
+            </p>
+
+
+            <a
+                href="../index.html"
+                class="advanced-back-home"
             >
+                ← Back to Home
+            </a>
 
-            <label for="loginPassword">Password</label>
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter your password"
-                required
-            >
-
-            <button type="submit" class="form-btn">
-                Login
-            </button>
-
-        </form>
-
-        <p id="loginMessage"></p>
-
-        <p class="form-link">
-            Don't have an account?
-            <a href="signin.html">Sign In</a>
-        </p>
+        </section>
 
     </div>
 
-</section>
+</main>
 
 
 <footer>
-
     <p>© 2026 AnimeVerse. All Rights Reserved.</p>
-
 </footer>
 
 
 <script src="../script.js"></script>
 
-</body>
+<script>
 
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginPassword =
+    document.getElementById("loginPassword");
+
+const toggleLoginPassword =
+    document.getElementById("toggleLoginPassword");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+
+if (toggleLoginPassword && loginPassword) {
+
+    toggleLoginPassword.addEventListener(
+        "click",
+        function () {
+
+            if (loginPassword.type === "password") {
+
+                loginPassword.type = "text";
+
+                toggleLoginPassword.textContent = "👁️̸";
+
+            } else {
+
+                loginPassword.type = "password";
+
+                toggleLoginPassword.textContent = "👁️";
+
+            }
+
+        }
+    );
+
+}
+
+
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+            const loginButton =
+                loginForm.querySelector(".advanced-login-btn");
+
+            const buttonText =
+                loginButton.querySelector("span");
+
+            const buttonArrow =
+                loginButton.querySelector("strong");
+
+
+            buttonText.textContent = "Signing in...";
+            buttonArrow.textContent = "⏳";
+
+            loginButton.disabled = true;
+
+            setTimeout(function () {
+
+                buttonText.textContent =
+                    "Login Successful";
+
+                buttonArrow.textContent = "✓";
+
+                loginButton.style.background =
+                    "linear-gradient(135deg, #2e7d32, #43a047)";
+
+                loginMessage.textContent =
+                    "Welcome back to AnimeVerse! 🎉";
+
+                loginMessage.classList.add("success");
+
+                setTimeout(function () {
+
+                    buttonText.textContent =
+                        "Login to AnimeVerse";
+
+                    buttonArrow.textContent = "→";
+
+                    loginButton.disabled = false;
+
+                    loginButton.style.background = "";
+
+                }, 2500);
+
+            }, 1000);
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
 </html>
