@@ -1,5 +1,23 @@
 
 const searchBox = document.getElementById("searchBox");
+const clearSearchBtn =
+    document.getElementById("clearSearchBtn");
+
+if (clearSearchBtn) {
+
+    clearSearchBtn.addEventListener("click", function () {
+
+        searchBox.value = "";
+
+        searchBox.dispatchEvent(
+            new Event("input")
+        );
+
+        searchBox.focus();
+
+    });
+
+}
 const genreFilter = document.getElementById("genreFilter");
 
 if (searchBox && genreFilter) {
@@ -43,6 +61,107 @@ if (searchBox && genreFilter) {
     searchBox.addEventListener("keyup", filterAnime);
 
     genreFilter.addEventListener("change", filterAnime);
+}
+
+const searchWrapper =
+    document.querySelector(".search-box-wrapper");
+
+if (searchBox && searchWrapper) {
+
+    const suggestionBox =
+        document.createElement("div");
+
+    suggestionBox.className =
+        "search-suggestions";
+
+    searchWrapper.appendChild(
+        suggestionBox
+    );
+
+
+    searchBox.addEventListener("input", function () {
+
+        const searchValue =
+            searchBox.value.trim().toLowerCase();
+
+        suggestionBox.innerHTML = "";
+
+        if (searchValue === "") {
+            suggestionBox.style.display = "none";
+            return;
+        }
+
+
+        const cards =
+            document.querySelectorAll(".card");
+
+        let matches = 0;
+
+
+        cards.forEach(card => {
+
+            const title =
+                card.querySelector("h3");
+
+            if (!title) return;
+
+            const animeTitle =
+                title.textContent.trim();
+
+            if (
+                animeTitle
+                    .toLowerCase()
+                    .includes(searchValue)
+                && matches < 5
+            ) {
+
+                const suggestion =
+                    document.createElement("div");
+
+                suggestion.textContent =
+                    animeTitle;
+
+                suggestion.className =
+                    "search-suggestion-item";
+
+
+                suggestion.addEventListener(
+                    "click",
+                    function () {
+
+                        searchBox.value =
+                            animeTitle;
+
+                        suggestionBox.style.display =
+                            "none";
+
+                        searchBox.dispatchEvent(
+                            new Event("keyup")
+                        );
+
+                    }
+                );
+
+
+                suggestionBox.appendChild(
+                    suggestion
+                );
+
+                matches++;
+
+            }
+
+        });
+
+
+        if (matches > 0) {
+            suggestionBox.style.display = "block";
+        } else {
+            suggestionBox.style.display = "none";
+        }
+
+    });
+
 }
 
 
