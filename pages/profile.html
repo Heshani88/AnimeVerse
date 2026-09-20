@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - AnimeVerse</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="auth-page">
+
+    <!-- Header -->
+    <header class="main-header">
+
+        <div class="logo">
+            <a href="../index.html">AnimeVerse</a>
+        </div>
+
+        <nav class="main-nav">
+            <a href="../index.html">Home</a>
+            <a href="anime.html">Anime</a>
+            <a href="shows.html">Shows</a>
+            <a href="manga.html">Manga</a>
+            <a href="news.html">News</a>
+            <a href="genres.html">Genres</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="favorites.html" class="header-link">❤️</a>
+            <a href="watchlist.html" class="header-link">📋</a>
+            <a href="profile.html" class="header-link">👤</a>
+
+            <a href="signin.html" class="signin-btn">Sign In</a>
+            <a href="login.html" class="login-btn">Login</a>
+
+            <button id="darkModeBtn" class="dark-mode-btn">
+                🌙
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- Profile -->
+    <main class="profile-container">
+
+        <section class="profile-card">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+            <h1>My Profile</h1>
+
+            <p class="profile-subtitle">
+                Manage your AnimeVerse profile
+            </p>
+
+
+            <div class="profile-info">
+
+                <div class="profile-item">
+                    <span>👤</span>
+
+                    <div>
+                        <small>Full Name</small>
+                        <strong id="profileName">
+                            Anime Fan
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="profile-item">
+                    <span>📧</span>
+
+                    <div>
+                        <small>Email Address</small>
+                        <strong id="profileEmail">
+                            user@example.com
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="profile-item">
+                    <span>❤️</span>
+
+                    <div>
+                        <small>Favorites</small>
+                        <strong id="favoriteCount">
+                            0 Anime
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="profile-item">
+                    <span>📋</span>
+
+                    <div>
+                        <small>Watchlist</small>
+                        <strong id="watchlistCount">
+                            0 Anime
+                        </strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a href="favorites.html">
+                    ❤️ My Favorites
+                </a>
+
+                <a href="watchlist.html">
+                    📋 My Watchlist
+                </a>
+
+                <a href="#" id="editProfileBtn">
+                    ✏️ Edit Profile
+                </a>
+
+                <a href="../index.html">
+                    🏠 Back to Home
+                </a>
+
+                <button id="logoutBtn" class="profile-logout-btn">
+                    🚪 Logout
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Edit Profile Modal -->
+
+<div id="editProfileModal" class="profile-modal">
+
+    <div class="profile-modal-content">
+
+        <button
+            id="closeEditProfile"
+            class="profile-modal-close"
+        >
+            ×
+        </button>
+
+        <h2>✏️ Edit Profile</h2>
+
+        <p>Update your AnimeVerse profile information.</p>
+
+        <form id="editProfileForm">
+
+            <label for="editName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="editName"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label for="editEmail">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="editEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <button
+                type="submit"
+                class="profile-save-btn"
+            >
+                💾 Save Changes
+            </button>
+
+            <p id="editProfileMessage"></p>
+
+        </form>
+
+    </div>
+
+</div>
+   
+
+    <footer>
+        <p>© 2026 AnimeVerse. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const isLoggedIn =
+         localStorage.getItem("animeVerseLoggedIn");
+
+    if (isLoggedIn !== "true") {
+        window.location.href = "login.html";
+    }
+</script>
+
+    <script src="../script.js"></script>
+
+    <script>
+const profileName =
+    document.getElementById("profileName");
+
+const profileEmail =
+    document.getElementById("profileEmail");
+
+const savedName =
+    localStorage.getItem("animeVerseUserName");
+
+const savedEmail =
+    localStorage.getItem("animeVerseUserEmail");
+
+
+if (savedName) {
+    profileName.textContent = savedName;
+}
+
+if (savedEmail) {
+    profileEmail.textContent = savedEmail;
+}
+
+const favoriteCount =
+    document.getElementById("favoriteCount");
+
+const savedFavorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
+favoriteCount.textContent =
+    savedFavorites.length + " Anime";
+
+const watchlistCount =
+    document.getElementById("watchlistCount");
+
+const savedWatchlist =
+    JSON.parse(localStorage.getItem("watchlist")) || [];
+
+watchlistCount.textContent =
+    savedWatchlist.length + " Anime";
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function () {
+
+        localStorage.removeItem("animeVerseLoggedIn");
+
+        window.location.href = "login.html";
+
+    });
+
+}
+
+const editProfileBtn =
+    document.getElementById("editProfileBtn");
+
+const editProfileModal =
+    document.getElementById("editProfileModal");
+
+const closeEditProfile =
+    document.getElementById("closeEditProfile");
+
+const editProfileForm =
+    document.getElementById("editProfileForm");
+
+const editName =
+    document.getElementById("editName");
+
+const editEmail =
+    document.getElementById("editEmail");
+
+const editProfileMessage =
+    document.getElementById("editProfileMessage");
+
+
+/* Open Edit Profile */
+
+if (editProfileBtn) {
+
+    editProfileBtn.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        editName.value =
+            localStorage.getItem("animeVerseUserName") || "";
+
+        editEmail.value =
+            localStorage.getItem("animeVerseUserEmail") || "";
+
+        editProfileModal.style.display = "flex";
+
+    });
+
+}
+
+
+/* Close Modal */
+
+if (closeEditProfile) {
+
+    closeEditProfile.addEventListener("click", function () {
+
+        editProfileModal.style.display = "none";
+
+    });
+
+}
+
+
+/* Close when clicking outside */
+
+if (editProfileModal) {
+
+    editProfileModal.addEventListener("click", function (event) {
+
+        if (event.target === editProfileModal) {
+
+            editProfileModal.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* Save Changes */
+
+if (editProfileForm) {
+
+    editProfileForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const newName =
+            editName.value.trim();
+
+        const newEmail =
+            editEmail.value.trim();
+
+
+        localStorage.setItem(
+            "animeVerseUserName",
+            newName
+        );
+
+        localStorage.setItem(
+            "animeVerseUserEmail",
+            newEmail
+        );
+
+
+        profileName.textContent =
+            newName;
+
+        profileEmail.textContent =
+            newEmail;
+
+
+        editProfileMessage.textContent =
+            "✅ Profile updated successfully!";
+
+        editProfileMessage.style.color =
+            "#2e7d32";
+
+
+        setTimeout(function () {
+
+            editProfileModal.style.display =
+                "none";
+
+            editProfileMessage.textContent = "";
+
+        }, 1200);
+
+    });
+
+}
+</script>
+
+</body>
+
+</html>

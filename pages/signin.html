@@ -428,34 +428,27 @@
 
 
 <script>
-
-
 const signinForm =
     document.getElementById("signinForm");
-
 
 const signinPassword =
     document.getElementById("signinPassword");
 
-
 const confirmPassword =
     document.getElementById("confirmPassword");
-
 
 const toggleSigninPassword =
     document.getElementById("toggleSigninPassword");
 
-
 const toggleConfirmPassword =
     document.getElementById("toggleConfirmPassword");
-
 
 const signinMessage =
     document.getElementById("signinMessage");
 
 
-
 /* Password visibility */
+
 if (toggleSigninPassword && signinPassword) {
 
     toggleSigninPassword.addEventListener("click", function () {
@@ -477,87 +470,92 @@ if (toggleSigninPassword && signinPassword) {
 }
 
 
-
 /* Confirm password visibility */
 
-if (
-    toggleConfirmPassword &&
-    confirmPassword
-) {
+if (toggleConfirmPassword && confirmPassword) {
 
-    toggleConfirmPassword.addEventListener(
-        "click",
-        function () {
+    toggleConfirmPassword.addEventListener("click", function () {
 
-            if (
-                confirmPassword.type ===
-                "password"
-            ) {
+        if (confirmPassword.type === "password") {
 
-                confirmPassword.type =
-                    "text";
+            confirmPassword.type = "text";
+            toggleConfirmPassword.textContent = "👁️̸";
 
-                toggleConfirmPassword.textContent =
-                    "👁️̸";
+        } else {
 
-            } else {
-
-                confirmPassword.type =
-                    "password";
-
-                toggleConfirmPassword.textContent =
-                    "👁️";
-
-            }
+            confirmPassword.type = "password";
+            toggleConfirmPassword.textContent = "👁️";
 
         }
-    );
+
+    });
 
 }
 
 
-
-/* Sign In Demo */
+/* Create Account */
 
 if (signinForm) {
 
-    signinForm.addEventListener(
-        "submit",
-        function (event) {
+    signinForm.addEventListener("submit", function (event) {
 
-            event.preventDefault();
+        event.preventDefault();
+
+        const name =
+            document.getElementById("signinName").value.trim();
+
+        const email =
+            document.getElementById("signinEmail").value.trim();
+
+        const password =
+            signinPassword.value;
+
+        const confirm =
+            confirmPassword.value;
 
 
-            if (
-                signinPassword.value !==
-                confirmPassword.value
-            ) {
+        /* Password validation */
 
-                signinMessage.textContent =
-                    "❌ Passwords do not match.";
-
-                signinMessage.classList.remove(
-                    "success"
-                );
-
-                return;
-
-            }
-
+        if (password !== confirm) {
 
             signinMessage.textContent =
-                "✅ Account created successfully!";
+                "❌ Passwords do not match.";
 
-            signinMessage.classList.add(
-                "success"
-            );
+            signinMessage.classList.remove("success");
 
+            return;
         }
-    );
+
+
+        /* Save user information */
+
+        localStorage.setItem(
+            "animeVerseUserName",
+            name
+        );
+
+        localStorage.setItem(
+            "animeVerseUserEmail",
+            email
+        );
+
+
+        /* Success message */
+
+        signinMessage.textContent =
+            "✅ Account created successfully!";
+
+        signinMessage.classList.add("success");
+
+        setTimeout(function () {
+
+            window.location.href = "login.html";
+
+        }, 1500);
+
+    });
 
 }
-
-
 </script>
 
 

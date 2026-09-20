@@ -2831,3 +2831,586 @@ footer p {
     position: relative;
     z-index: 2;
 }
+
+/* =========================================
+   ANIMEVERSE PROFILE PAGE
+   ========================================= */
+
+.profile-container {
+    min-height: calc(100vh - 145px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(244, 81, 30, 0.14),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(123, 74, 203, 0.14),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #fff7f2,
+            #f4efff
+        );
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 700px;
+
+    padding: 45px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    backdrop-filter: blur(18px);
+
+    border-radius: 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4511e,
+            #ff7043,
+            #7b4acb
+        );
+
+    box-shadow:
+        0 12px 30px rgba(244, 81, 30, 0.25);
+}
+
+.profile-card h1 {
+    margin: 0 0 8px;
+
+    font-size: 32px;
+
+    color: #222;
+}
+
+.profile-subtitle {
+    margin-bottom: 30px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* Profile information */
+
+.profile-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+.profile-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    text-align: left;
+
+    border-radius: 15px;
+
+    background: #fafafa;
+
+    border: 1px solid #eeeeee;
+
+    transition: 0.3s;
+}
+
+.profile-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-item > span {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #fff1eb;
+
+    font-size: 20px;
+}
+
+.profile-item div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.profile-item small {
+    color: #999;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+.profile-item strong {
+    color: #333;
+
+    font-size: 14px;
+}
+
+
+/* Profile buttons */
+
+.profile-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.profile-actions a {
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    background: #f4511e;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.profile-actions a:hover {
+    background: #ff7043;
+
+    transform: translateY(-2px);
+}
+
+
+/* Dark mode */
+
+.dark-mode .profile-container {
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(244, 81, 30, 0.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #101010,
+            #1b1725
+        );
+}
+
+.dark-mode .profile-card {
+    background: rgba(30, 30, 30, 0.92);
+
+    border-color:
+        rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .profile-card h1 {
+    color: white;
+}
+
+.dark-mode .profile-subtitle {
+    color: #aaa;
+}
+
+.dark-mode .profile-item {
+    background: #282828;
+
+    border-color: #414141;
+}
+
+.dark-mode .profile-item > span {
+    background: #34251f;
+}
+
+.dark-mode .profile-item small {
+    color: #999;
+}
+
+.dark-mode .profile-item strong {
+    color: #eee;
+}
+
+
+/* Responsive */
+
+@media (max-width: 650px) {
+
+    .profile-container {
+        padding: 30px 15px;
+    }
+
+    .profile-card {
+        padding: 35px 22px;
+
+        border-radius: 22px;
+    }
+
+    .profile-card h1 {
+        font-size: 28px;
+    }
+
+    .profile-info {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions a {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+}
+
+/* Logout Button */
+
+.profile-logout-btn {
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #e85d04, #f4511e);
+
+    color: white;
+
+    border: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow: 0 5px 15px rgba(244, 81, 30, 0.18);
+}
+
+.profile-logout-btn:hover {
+    background: linear-gradient(135deg, #d94801, #e64a19);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(244, 81, 30, 0.25);
+}
+
+
+/* Dark Mode */
+
+.dark-mode .profile-logout-btn {
+    background: linear-gradient(135deg, #f4511e, #ff7043);
+}
+
+.dark-mode .profile-logout-btn:hover {
+    background: linear-gradient(135deg, #e64a19, #f4511e);
+}
+
+/* =========================================
+   EDIT PROFILE MODAL
+   ========================================= */
+
+.profile-modal {
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(6px);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+.profile-modal-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 450px;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+    animation: profileModalIn 0.3s ease;
+}
+
+@keyframes profileModalIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.profile-modal-content h2 {
+    margin: 0 0 8px;
+
+    color: #222;
+
+    font-size: 25px;
+}
+
+.profile-modal-content > p {
+    margin-bottom: 25px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.profile-modal-content label {
+    display: block;
+
+    margin: 15px 0 7px;
+
+    color: #444;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.profile-modal-content input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.profile-modal-content input:focus {
+    border-color: #f4511e;
+
+    box-shadow:
+        0 0 0 3px rgba(244, 81, 30, 0.10);
+}
+
+.profile-modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f5f5f5;
+
+    color: #555;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.profile-modal-close:hover {
+    background: #f4511e;
+
+    color: white;
+}
+
+.profile-save-btn {
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4511e,
+            #ff7043
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.profile-save-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(244, 81, 30, 0.25);
+}
+
+#editProfileMessage {
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-top: 15px;
+}
+
+
+/* Dark Mode */
+
+.dark-mode .profile-modal-content {
+    background: #202020;
+}
+
+.dark-mode .profile-modal-content h2 {
+    color: white;
+}
+
+.dark-mode .profile-modal-content > p {
+    color: #aaa;
+}
+
+.dark-mode .profile-modal-content label {
+    color: #ddd;
+}
+
+.dark-mode .profile-modal-content input {
+    background: #2b2b2b;
+
+    color: white;
+
+    border-color: #444;
+}
+
+.dark-mode .profile-modal-content input::placeholder {
+    color: #888;
+}
+
+.dark-mode .profile-modal-close {
+    background: #333;
+
+    color: #ddd;
+}
+
+.dark-mode .profile-modal-close:hover {
+    background: #f4511e;
+
+    color: white;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .profile-modal-content {
+        padding: 30px 22px;
+    }
+
+}

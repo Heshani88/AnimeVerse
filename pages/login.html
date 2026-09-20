@@ -259,6 +259,15 @@ const toggleLoginPassword =
 const loginMessage =
     document.getElementById("loginMessage");
 
+const savedEmail =
+    localStorage.getItem("animeVerseUserEmail");
+
+if (savedEmail) {
+
+    document.getElementById("loginEmail").value =
+        savedEmail;
+
+}
 
 if (toggleLoginPassword && loginPassword) {
 
@@ -321,6 +330,17 @@ if (loginForm) {
 
                 loginMessage.textContent =
                     "Welcome back to AnimeVerse! 🎉";
+
+                localStorage.setItem(
+                    "animeVerseLoggedIn",
+                    "true"
+                );
+
+                setTimeout(function () {
+
+                    window.location.href = "profile.html";
+
+                }, 1500);
 
                 loginMessage.classList.add("success");
 
